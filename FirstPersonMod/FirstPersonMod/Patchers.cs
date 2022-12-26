@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Harmony;
+using HarmonyLib;
 using UnityEngine;
+using Il2CppLirp;
+using Il2Cpp;
 
 namespace FirstPersonMod
 {
-    [HarmonyPatch(typeof(Lirp.SnowboardController), "Show")]
-    class SnowboardControllerPatcher_Show
+    [HarmonyPatch(typeof(SnowboardController), "Show")]
+    internal class SnowboardControllerPatcher_Show
     {
         [HarmonyPostfix]
-        public static void Postfix(System.Reflection.MethodBase __originalMethod, Lirp.SnowboardController __instance)
+        public static void Postfix(System.Reflection.MethodBase __originalMethod, SnowboardController __instance)
         {
             try
             {
@@ -48,11 +50,11 @@ namespace FirstPersonMod
         }
     }
 
-    [HarmonyPatch(typeof(Lirp.SnowboardController), "StartNewRide")]
-    class StartRidePatcher
+    [HarmonyPatch(typeof(SnowboardController), "StartNewRide")]
+    internal class StartRidePatcher
     {
         [HarmonyPostfix]
-        public static void Postfix(System.Reflection.MethodBase __originalMethod, Lirp.SnowboardController __instance)
+        public static void Postfix(System.Reflection.MethodBase __originalMethod, SnowboardController __instance)
         {
             try
             {
@@ -73,11 +75,11 @@ namespace FirstPersonMod
         }
     }
 
-    [HarmonyPatch(typeof(Lirp.ActionInAir), "OnStart")]
-    class ActionInAirPatcher
+    [HarmonyPatch(typeof(ActionInAir), "OnStart")]
+    internal class ActionInAirPatcher
     {
         [HarmonyPostfix]
-        public static void Postfix(System.Reflection.MethodBase __originalMethod, Lirp.ActionInAir __instance)
+        public static void Postfix(System.Reflection.MethodBase __originalMethod, ActionInAir __instance)
         {
             try
             {
@@ -96,11 +98,11 @@ namespace FirstPersonMod
         }
     }
 
-    [HarmonyPatch(typeof(Lirp.ActionTakeoff), "OnStart")]
-    class ActionTakeoffPatcher
+    [HarmonyPatch(typeof(ActionTakeoff), "OnStart")]
+    internal class ActionTakeoffPatcher
     {
         [HarmonyPostfix]
-        public static void Postfix(System.Reflection.MethodBase __originalMethod, Lirp.ActionTakeoff __instance)
+        public static void Postfix(System.Reflection.MethodBase __originalMethod, ActionTakeoff __instance)
         {
             try
             {
@@ -119,11 +121,11 @@ namespace FirstPersonMod
         }
     }
 
-    [HarmonyPatch(typeof(Lirp.LandDetector), "StartLanding")]
-    class OnLandPatcher
+    [HarmonyPatch(typeof(LandDetector), "StartLanding")]
+    internal class OnLandPatcher
     {
         [HarmonyPostfix]
-        public static void Postfix(System.Reflection.MethodBase __originalMethod, Lirp.LandDetector __instance)
+        public static void Postfix(System.Reflection.MethodBase __originalMethod, LandDetector __instance)
         {
             try
             {
@@ -142,11 +144,11 @@ namespace FirstPersonMod
         }
     }
 
-    [HarmonyPatch(typeof(Lirp.ActionGrab), "OnStart")]
-    class OnGrabPatcher
+    [HarmonyPatch(typeof(ActionGrab), "OnStart")]
+    internal class OnGrabPatcher
     {
         [HarmonyPostfix]
-        public static void Postfix(System.Reflection.MethodBase __originalMethod, Lirp.ActionGrab __instance)
+        public static void Postfix(System.Reflection.MethodBase __originalMethod, ActionGrab __instance)
         {
             try
             {
@@ -165,11 +167,11 @@ namespace FirstPersonMod
         }
     }
 
-    [HarmonyPatch(typeof(Lirp.ActionButter), "OnStart")]
-    class OnButterPatcher
+    [HarmonyPatch(typeof(ActionButter), "OnStart")]
+    internal class OnButterPatcher
     {
         [HarmonyPostfix]
-        public static void Postfix(System.Reflection.MethodBase __originalMethod, Lirp.ActionButter __instance)
+        public static void Postfix(System.Reflection.MethodBase __originalMethod, ActionButter __instance)
         {
             try
             {
@@ -188,11 +190,11 @@ namespace FirstPersonMod
         }
     }
 
-    [HarmonyPatch(typeof(Lirp.ActionButter), "OnEnd")]
-    class OnButterEndPatcher
+    [HarmonyPatch(typeof(ActionButter), "OnEnd")]
+    internal class OnButterEndPatcher
     {
         [HarmonyPostfix]
-        public static void Postfix(System.Reflection.MethodBase __originalMethod, Lirp.ActionButter __instance)
+        public static void Postfix(System.Reflection.MethodBase __originalMethod, ActionButter __instance)
         {
             try
             {
@@ -210,11 +212,11 @@ namespace FirstPersonMod
         }
     }
 
-    [HarmonyPatch(typeof(Lirp.ActionRail), "OnStart")]
-    class OnRailPatcher
+    [HarmonyPatch(typeof(ActionRail), "OnStart")]
+    internal class OnRailPatcher
     {
         [HarmonyPostfix]
-        public static void Postfix(System.Reflection.MethodBase __originalMethod, Lirp.ActionRail __instance)
+        public static void Postfix(System.Reflection.MethodBase __originalMethod, ActionRail __instance)
         {
             try
             {
@@ -233,11 +235,11 @@ namespace FirstPersonMod
         }
     }
 
-    [HarmonyPatch(typeof(Lirp.ActionCrash), "OnStart")]
-    class OnCrashPatcher
+    [HarmonyPatch(typeof(ActionCrash), "OnStart")]
+    internal class OnCrashPatcher
     {
         [HarmonyPostfix]
-        public static void Postfix(System.Reflection.MethodBase __originalMethod, Lirp.ActionCrash __instance)
+        public static void Postfix(System.Reflection.MethodBase __originalMethod, ActionCrash __instance)
         {
             try
             {
@@ -257,7 +259,7 @@ namespace FirstPersonMod
     }
 
     [HarmonyPatch(typeof(MenuViewStateSetter), "OnShowView")]
-    class MenuViewOnShowPatcher
+    internal class MenuViewOnShowPatcher
     {
         [HarmonyPrefix]
         public static void Prefix(System.Reflection.MethodBase __originalMethod, MenuViewStateSetter __instance)
@@ -279,7 +281,7 @@ namespace FirstPersonMod
     }
 
     [HarmonyPatch(typeof(MenuViewStateSetter), "OnHideView")]
-    class MenuViewOnHidePatcher
+    internal class MenuViewOnHidePatcher
     {
         [HarmonyPrefix]
         public static void Prefix(System.Reflection.MethodBase __originalMethod, MenuViewStateSetter __instance)

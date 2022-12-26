@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Il2CppTMPro;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -70,9 +70,9 @@ namespace FirstPersonMod
         //FOV
         private void OnFovReset()
         {
-            fovSlider.value = ModManager.m_fovPref.DefaultValue;
+            fovSlider.value = float.Parse(ModManager.m_fovPref.DefaultValue);
             fovInputFieldTMPro.text = ModManager.m_fovPref.DefaultValue.ToString();
-            ModManager.SetFov(ModManager.m_fovPref.DefaultValue);
+            ModManager.SetFov(float.Parse(ModManager.m_fovPref.DefaultValue));
         }
 
         private void OnFovSubmit(string text)
@@ -90,9 +90,9 @@ namespace FirstPersonMod
         //ANGLE OFFSET
         private void OnAngleOffsetReset()
         {
-            angleOffsetSlider.value = ModManager.m_angleOffsetPref.DefaultValue;
+            angleOffsetSlider.value = float.Parse(ModManager.m_angleOffsetPref.DefaultValue);
             angleOffsetInputFieldTMPro.text = ModManager.m_angleOffsetPref.DefaultValue.ToString();
-            ModManager.SetAngleOffset(ModManager.m_angleOffsetPref.DefaultValue);
+            ModManager.SetAngleOffset(float.Parse(ModManager.m_angleOffsetPref.DefaultValue));
         }
 
         private void OnAngleOffsetSubmit(string text)

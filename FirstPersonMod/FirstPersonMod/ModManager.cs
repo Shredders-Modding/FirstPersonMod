@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MelonLoader;
-using UnhollowerRuntimeLib;
-using Cinemachine;
 using UnityEngine;
+using Il2CppLirp;
+using Il2CppCinemachine;
+using Il2CppInterop.Runtime.Injection;
 
 namespace FirstPersonMod
 {
@@ -27,8 +28,8 @@ namespace FirstPersonMod
         public static bool m_isInit;
         public static bool m_modActivated;
 
-        public static Lirp.UserSession m_userSession;
-        public static Lirp.SnowboardController m_snowboardController;
+        public static UserSession m_userSession;
+        public static SnowboardController m_snowboardController;
         public static Transform m_headNubT;
         public static List<GameObject> m_headObjects;
         public static Rigidbody m_snowboardRb;
@@ -39,10 +40,10 @@ namespace FirstPersonMod
         public static float m_angleOffset;
 
         public static MelonPreferences_Category m_firstPersonPrefCategory;
-        public static MelonPreferences_Entry<float> m_fovPref;
-        public static MelonPreferences_Entry<float> m_angleOffsetPref;
+        public static MelonPreferences_Entry<string> m_fovPref;
+        public static MelonPreferences_Entry<string> m_angleOffsetPref;
 
-        public override void OnApplicationStart()
+        public override void OnInitializeMelon()
         {
             ClassInjector.RegisterTypeInIl2Cpp<PositionTargeter>();
             ClassInjector.RegisterTypeInIl2Cpp<RotationTargeter>();
@@ -55,11 +56,11 @@ namespace FirstPersonMod
             m_headObjects = new List<GameObject>();
 
             m_firstPersonPrefCategory = MelonPreferences.CreateCategory("firstPersonPrefCategory");
-            m_fovPref = m_firstPersonPrefCategory.CreateEntry("fovPref", 90f);
-            m_angleOffsetPref = m_firstPersonPrefCategory.CreateEntry("angleOffsetPref", 20f);
+            m_fovPref = m_firstPersonPrefCategory.CreateEntry("fovPref", 90f.ToString("F2"));
+            m_angleOffsetPref = m_firstPersonPrefCategory.CreateEntry("angleOffsetPref", 20f.ToString("F2"));
 
-            m_fov = m_fovPref.Value;
-            m_angleOffset = m_angleOffsetPref.Value;
+            m_fov = float.Parse(m_fovPref.Value);
+            m_angleOffset = float.Parse(m_angleOffsetPref.Value);
 
             m_assetManager = new AssetManager();
     }
@@ -73,7 +74,7 @@ namespace FirstPersonMod
 
             if (sceneName == "GameBase")
             {
-                m_userSession = GameObject.Find("UserSession").GetComponent<Lirp.UserSession>();
+                m_userSession = GameObject.Find("UserSession").GetComponent<UserSession>();
             }
         }
 
@@ -181,7 +182,7 @@ namespace FirstPersonMod
         public static void SetFov(float _fov)
         {
             m_fov = _fov;
-            m_fovPref.Value = _fov;
+            m_fovPref.Value = _fov.ToString("F2");
             if (m_isInit)
             {
                 m_cameraManager.SetFov(_fov);
@@ -191,7 +192,7 @@ namespace FirstPersonMod
         public static void SetAngleOffset(float _offset)
         {
             m_angleOffset = _offset;
-            m_angleOffsetPref.Value = _offset;
+            m_angleOffsetPref.Value = _offset.ToString("F2");
             if (m_isInit)
             {
                 m_cameraManager.SetAngleOffset(_offset);
